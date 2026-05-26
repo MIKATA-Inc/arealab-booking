@@ -23,7 +23,16 @@
     .lead {
       color: #555;
       font-size: 14px;
+      margin: 0 0 16px;
+    }
+    .note {
+      background: #fff8dc;
+      border-left: 3px solid #d4a017;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #555;
       margin: 0 0 24px;
+      border-radius: 4px;
     }
     #timerex_calendar {
       width: 100%;
@@ -47,9 +56,11 @@
 <body>
   <h1>面談日程のご予約</h1>
   <p class="lead">
-    ご都合の良いお日にちをお選びください。<br>
-    ご予約完了後、自動で書類提出フォームへ移動します。
+    ご都合の良いお日にちをお選びください。
   </p>
+  <div class="note">
+    ご予約フォーム内で、<strong>履歴書・職務経歴書のアップロード</strong>もお願いいたします。
+  </div>
 
   <!-- Begin TimeRex Widget -->
   <div id="timerex_calendar" data-url=""></div>
@@ -61,7 +72,6 @@
 
   <script>
     const TIMEREX_BASE = 'https://timerex.net/s/mikata1021/bd084a70';
-    const UTAGE_FORM_URL = 'https://example.com/utage/form/placeholder';
 
     const urlParams = new URLSearchParams(window.location.search);
     const lmeUid = urlParams.get('lme_uid') || '';
@@ -75,14 +85,7 @@
   <script id="timerex_embed" src="https://asset.timerex.net/js/embed.js"></script>
 
   <script type="text/javascript">
-    TimerexCalendar({
-      onBookingComplete: function() {
-        const redirectUrl = UTAGE_FORM_URL +
-          (UTAGE_FORM_URL.includes('?') ? '&' : '?') +
-          'lme_uid=' + encodeURIComponent(lmeUid);
-        window.location.href = redirectUrl;
-      }
-    });
+    TimerexCalendar();
   </script>
 </body>
 </html>
