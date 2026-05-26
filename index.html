@@ -73,11 +73,9 @@
   <script>
     const TIMEREX_BASE = 'https://timerex.net/s/mikata1021/bd084a70';
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const lmeUid = urlParams.get('lme_uid') || '';
-
-    const dataUrl = lmeUid
-      ? TIMEREX_BASE + '?lme_uid=' + encodeURIComponent(lmeUid)
+    const queryString = window.location.search.replace(/^\?/, '');
+    const dataUrl = queryString
+      ? TIMEREX_BASE + '?' + queryString
       : TIMEREX_BASE;
     document.getElementById('timerex_calendar').setAttribute('data-url', dataUrl);
   </script>
