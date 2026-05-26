@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>面談日程のご予約 | 合同会社エリアラボ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    html, body { overflow-y: auto; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 16px 80px;
+      color: #222;
+      background: #fafafa;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 0 0 12px;
+    }
+    .lead {
+      color: #555;
+      font-size: 14px;
+      margin: 0 0 24px;
+    }
+    #timerex_calendar {
+      width: 100%;
+      min-height: 1400px;
+    }
+    #timerex_calendar iframe {
+      width: 100% !important;
+      min-height: 1400px !important;
+      border: 0 !important;
+    }
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e5e5;
+      color: #888;
+      font-size: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>面談日程のご予約</h1>
+  <p class="lead">
+    ご都合の良いお日にちをお選びください。<br>
+    ご予約完了後、自動で書類提出フォームへ移動します。
+  </p>
+
+  <!-- Begin TimeRex Widget -->
+  <div id="timerex_calendar" data-url=""></div>
+  <!-- End TimeRex Widget -->
+
+  <footer>
+    合同会社エリアラボ 採用担当
+  </footer>
+
+  <script>
+    const TIMEREX_BASE = 'https://timerex.net/s/mikata1021/bd084a70';
+    const UTAGE_FORM_URL = 'https://example.com/utage/form/placeholder';
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const lmeUid = urlParams.get('lme_uid') || '';
+
+    const dataUrl = lmeUid
+      ? TIMEREX_BASE + '?lme_uid=' + encodeURIComponent(lmeUid)
+      : TIMEREX_BASE;
+    document.getElementById('timerex_calendar').setAttribute('data-url', dataUrl);
+  </script>
+
+  <script id="timerex_embed" src="https://asset.timerex.net/js/embed.js"></script>
+
+  <script type="text/javascript">
+    TimerexCalendar({
+      onBookingComplete: function() {
+        const redirectUrl = UTAGE_FORM_URL +
+          (UTAGE_FORM_URL.includes('?') ? '&' : '?') +
+          'lme_uid=' + encodeURIComponent(lmeUid);
+        window.location.href = redirectUrl;
+      }
+    });
+  </script>
+</body>
+</html>
